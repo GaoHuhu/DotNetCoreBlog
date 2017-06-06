@@ -27,10 +27,68 @@ namespace Jack.Gao.Blog.Mvc.Controllers
 
             blogs = BlogDataAccess.GetBlogs(out count, out total, pageIndex, pageRows);
 
+            int previous = 1;
+
+            previous = pageIndex - 1;
+
+            if (previous <= 0)
+            {
+                previous = 1;
+            }
+            else
+            {
+                if (previous > count && count > 0)
+                {
+                    previous = count;
+                }
+            }
+
+            int next = 1;
+
+            next = pageIndex + 1;
+
+            if (next <= 0)
+            {
+                next = 1;
+            }
+            else
+            {
+                if (next > count && count > 0)
+                {
+                    next = count;
+                }
+            }
+
+            int currentPageIndex = 1;
+
+            if (currentPageIndex <= 0)
+            {
+                currentPageIndex = 1;
+            }
+            else if (currentPageIndex >count)
+            {
+                if (count > 0)
+                    currentPageIndex = count;
+                else
+                    currentPageIndex = 1;
+            }
+            else
+            {
+                currentPageIndex = pageIndex;
+            }
+
+            int firstPage = 1;
+            int lastPage = count == 0 ? 1 : count;
+
             ViewBag.PageIndex = pageIndex;
             ViewBag.Count = count;
             ViewBag.Total = total;
             ViewBag.Blogs = blogs;
+            ViewBag.FirstPage = firstPage;
+            ViewBag.LastPage = lastPage;
+            ViewBag.PageIndex = currentPageIndex;
+            ViewBag.Previous = previous;
+            ViewBag.Next = next;
 
             return View();
         }
@@ -98,7 +156,13 @@ namespace Jack.Gao.Blog.Mvc.Controllers
             ViewBag.FirstPage = firstPage;
             ViewBag.LastPage = lastPage;
 
-            return PartialView();
+            pageModel.First = firstPage;
+            pageModel.Last = lastPage;
+            pageModel.PageIndex = currentPageIndex;
+            pageModel.Previous = previous;
+            pageModel.Next = next;
+
+            return PartialView(pageModel);
         }
 
 
