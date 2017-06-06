@@ -1,0 +1,55 @@
+@using Jack.Gao.Blog.Mvc.Model
+
+@{
+    ViewData["Title"] = "Index";
+    List<CommentViewModel> comments = ViewBag.Comments;
+}
+
+<h2>Index</h2>
+@section HeadScript{
+    <script>
+        function SaveComment() {
+
+            var key = document.getElementById("blogId").value;
+            var comment = document.getElementById("blogcomment").value;
+
+            $.ajax({
+                url: "/Comment/SaveComment",
+                dataType: "json",
+                data: { "blogId": key, "comment": comment},
+                type: "post",
+                success: function (data) {
+                    if (data == true) {
+                        alert("success");
+                        location.reload();
+                    }
+                    else {
+                        alert("failed");
+                    }
+                }
+            });
+        }
+    </script>
+}
+
+<div>
+    <input type="hidden" name="blogId" id="blogId" value="@ViewBag.BlogId" />
+    Blog Comment:<input type="text" name="blogcomment" id="blogcomment" />
+    <input type="button" name="content" id="content" value="Save" onclick="SaveComment()" />
+</div>
+
+<hr />
+
+<table width="95%" style="text-align:center">
+    <thead>
+        <tr><td>Blog id</td><td>Comment id</td><td>Comment</td><td>Created time</td><td>Updated time</td><td>Operator</td></tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in comments)
+        {
+            <tr><td>@item.BlogId</td><td>@item.CommentId</td><td>@item.Comment</td><td>@item.CreatedTime</td><td>@item.UpdatedTime</td><td><input type="button" value="Delete" onclick="DeleteBlog('@item.BlogId')" /> </td></tr>
+        }
+
+    </tbody>
+</table>

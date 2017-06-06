@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="ad4705b4-452d-47e0-aa02-264b8c63ddf0" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="8c03d57f-7b9e-4265-a113-6e0762d6ceaa" name="Jack.Gao.Blog.Mvc">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="5e55b837-2855-4204-ac66-7fd86a6847f2" direction="Forward">
+          <layerMoniker Id="9d217375-a74e-4fda-a21e-a067682ecf51" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="9a397356-fcc0-4f8f-b2d9-92d372a44b6b" name="Jack.Gao.Blog.Mvc">
+          <ArtifactNode Label="Jack.Gao.Blog.Mvc" Category="CodeSchema_Project" Id="(Assembly=../Jack.Gao.Blog.Mvc/Jack.Gao.Blog.Mvc.csproj)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=Jack.Gao.Blog.Mvc)" Label="Jack.Gao.Blog.Mvc.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="9d217375-a74e-4fda-a21e-a067682ecf51" name="Jack.Gao.Blog.DataAccess">
+      <references>
+        <reference Id="25f49763-39fe-40c3-a6e2-9adcd102b627" name="Jack.Gao.Blog.DataAccess">
+          <ArtifactNode Label="Jack.Gao.Blog.DataAccess" Category="CodeSchema_Project" Id="(Assembly=../Jack.Gao.Blog.DataAccess/Jack.Gao.Blog.DataAccess.csproj)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=Jack.Gao.Blog.DataAccess)" Label="Jack.Gao.Blog.DataAccess.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+  </layers>
+</layerModel>

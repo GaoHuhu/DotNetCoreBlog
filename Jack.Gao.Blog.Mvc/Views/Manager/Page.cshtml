@@ -1,0 +1,17 @@
+
+@{
+    ViewData["Title"] = "Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Page</h2>
+<div>
+    <a href="/Manager/Blog?pageIndex=@ViewBag.FirstPage&pageRows=5">First Page</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;<a href="/Manager/Blog?pageIndex=@ViewBag.Previous&pageRows=5">Previous</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;<a href="/Manager/Blog?pageIndex=@ViewBag.Next&pageRows=5">Next</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;<a href="/Manager/Blog?pageIndex=@ViewBag.LastPage&pageRows=5">Last Page</a>
+    &nbsp;&nbsp;&nbsp;&nbsp; Total page count:@ViewBag.PageCounts
+    &nbsp;&nbsp;&nbsp;&nbsp; Current page index:@ViewBag.CurrentIndex
+    &nbsp;&nbsp;&nbsp;&nbsp; Total rows:@ViewBag.Total
+</div>
+

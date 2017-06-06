@@ -1,0 +1,105 @@
+@using Jack.Gao.Blog.ViewModel
+
+@{
+    ViewData["Title"] = "Blog";
+    List<BlogViewModel> blogs = ViewBag.Blogs;
+
+}
+@section HeadScript{
+    <script src=""></script>
+    <script>
+        function SaveBlog() {
+
+            var key = document.getElementById("id").value;
+            var title = document.getElementById("title").value;
+            var content = document.getElementById("content").value;
+
+            $.ajax({
+                url: "/Manager/SaveBlog",
+                dataType: "json",
+                data: { "id": key, "title": title, "content": content },
+                type: "post",
+                success: function (data) {
+                    if (data == true) {
+                        alert("success");
+                        location.reload();
+                    }
+                    else {
+                        alert("failed");
+                    }
+                }
+            });
+        }
+
+        function ShowBlog(key, title, content) {
+            document.getElementById("id").value = key;
+            document.getElementById("title").value = title;
+            document.getElementById("content").value = content;
+        }
+
+        function DeleteBlog(key) {
+            if (window.confirm("Are you sure delete blog?")) {
+                $.ajax({
+                    url: "/Manager/DeleteBlog",
+                    dataType: "json",
+                    data: { "id": key },
+                    type: "post",
+                    success: function (data) {
+                        if (data == true) {
+                            alert("success");
+                            location.reload();
+                        }
+                        else {
+                            alert("failed");
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+}
+
+<div class="container-fluid">
+    <div class="col-lg-6">
+        <h2>Blog</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Content</th>
+                        <th>Created time</th>
+                        <th>Updated time</th>
+                        <th>Operator</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in blogs)
+                    {
+                    <tr>
+                        <td>@item.BlogId</td>
+                        <td>@item.Title</td>
+                        <td>@item.Content</td>
+                        <td>@item.CreatedTime</td>
+                        <td>@item.UpdatedTime</td>
+                        <td><input type="button" value="Delete" onclick="DeleteBlog('@item.BlogId')" /> | <input type="button" value="Edit" onclick="ShowBlog('@item.BlogId','@item.Title','@item.Content')" /> | <a href="/Comment/Index?blogId=@item.BlogId">Comment</a></td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div>
+    <input type="hidden" name="id" id="id" />
+    Title:<input type="text" name="title" id="title" />
+    Content:<input type="text" name="content" id="content" />
+    <input type="button" name="content" id="content" value="Save" onclick="SaveBlog()" />
+</div>
+<hr />
+
+@{
+    Html.RenderPartial("Page", null);
+}

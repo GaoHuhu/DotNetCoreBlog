@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jack.Gao.Blog.ViewModel\Jack.Gao.Blog.ViewModel.csproj" />
+  </ItemGroup>
+
+</Project>

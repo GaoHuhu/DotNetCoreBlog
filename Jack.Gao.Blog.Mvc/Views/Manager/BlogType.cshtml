@@ -1,0 +1,103 @@
+
+@using Jack.Gao.Blog.ViewModel
+
+@{
+    ViewData["Title"] = "BlogType";
+    List<BlogTypeViewModel> blogtypes = ViewBag.BlogTypes;
+
+}
+@section HeadScript{
+    <script>
+        function SaveBlogType() {
+
+            var key = document.getElementById("id").value;
+            var name = document.getElementById("blogname").value;
+
+            $.ajax({
+                url: "/Manager/SaveBlogType",
+                dataType: "json",
+                data: { "id": key, "name": name },
+                type: "post",
+                success: function (data) {
+                    if (data == true) {
+                        alert("success");
+                        location.reload();
+                    }
+                    else {
+                        alert("failed");
+                    }
+                }
+            });
+        }
+
+        function ShowBlogType(key, blogname) {
+            document.getElementById("id").value = key;
+            document.getElementById("blogname").value = blogname;
+        }
+
+        function DeleteBlogType(key) {
+            if (window.confirm("Are you sure delete blog type?")) {
+                $.ajax({
+                    url: "/Manager/DeleteBlogType",
+                    dataType: "json",
+                    data: { "id": key },
+                    type: "post",
+                    success: function (data) {
+                        if (data == true) {
+                            alert("success");
+                            location.reload();
+                        }
+                        else {
+                            alert("failed");
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+}
+
+<h2>Blog type</h2>
+
+<table width="95%" style="text-align:center">
+    <thead>
+        <tr><td>Id</td><td>Name</td><td>Created time</td><td>Updated time</td><td>Operator</td></tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in blogtypes)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.CreatedTime</td>
+                <td>@item.UpdatedTime</td>
+                <td>
+                    <input type="button" value="Delete" onclick="DeleteBlogType('@item.Id')" />
+                    |
+                    <input type="button" value="Edit" onclick="ShowBlogType('@item.Id','@item.Name')" />
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+
+
+</table>
+
+<hr />
+<div>
+    <input type="hidden" name="id" id="id" />
+    Name:<input type="text" name="blogname" id="blogname" />
+    <input type="button" name="content" id="content" value="Save" onclick="SaveBlogType()" />
+</div>
+<hr />
+<div>
+    <a href="/Manager/BlogType?pageIndex=@ViewBag.Previous&pageRows=5">Previous</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;<a href="/Manager/BlogType?pageIndex=@ViewBag.Next&pageRows=5">Next</a>
+    &nbsp;&nbsp;&nbsp;&nbsp; Total page count:@ViewBag.PageCounts
+    &nbsp;&nbsp;&nbsp;&nbsp; Current page index:@ViewBag.CurrentIndex
+    &nbsp;&nbsp;&nbsp;&nbsp; Total rows:@ViewBag.Total
+</div>
+
