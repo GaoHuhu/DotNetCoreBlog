@@ -28,7 +28,6 @@
     <ProjectReference Include="..\Jack.Gao.Blog.ViewModel\Jack.Gao.Blog.ViewModel.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\Error\" />
   </ItemGroup>

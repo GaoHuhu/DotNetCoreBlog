@@ -27,16 +27,19 @@ namespace Jack.Gao.Blog.Mvc.Controllers
 
             blogs = BlogDataAccess.GetBlogs(out count, out total, pageIndex, pageRows);
 
+            ViewBag.PageIndex = pageIndex;
+            ViewBag.Count = count;
+            ViewBag.Total = total;
             ViewBag.Blogs = blogs;
 
             return View();
         }
 
-        public IActionResult Page(int pageIndex, int count, int total)
+        public PartialViewResult Page(PageModel pageModel)
         {
             int previous = 1;
 
-            previous = pageIndex - 1;
+            previous = pageModel.PageIndex - 1;
 
             if (previous <= 0)
             {
@@ -44,15 +47,15 @@ namespace Jack.Gao.Blog.Mvc.Controllers
             }
             else
             {
-                if (previous > count && count > 0)
+                if (previous > pageModel.Count && pageModel.Count > 0)
                 {
-                    previous = count;
+                    previous = pageModel.Count;
                 }
             }
 
             int next = 1;
 
-            next = pageIndex + 1;
+            next = pageModel.PageIndex + 1;
 
             if (next <= 0)
             {
@@ -60,9 +63,9 @@ namespace Jack.Gao.Blog.Mvc.Controllers
             }
             else
             {
-                if (next > count && count > 0)
+                if (next > pageModel.Count && pageModel.Count > 0)
                 {
-                    next = count;
+                    next = pageModel.Count;
                 }
             }
 
@@ -72,32 +75,32 @@ namespace Jack.Gao.Blog.Mvc.Controllers
             {
                 currentPageIndex = 1;
             }
-            else if (currentPageIndex > count)
+            else if (currentPageIndex > pageModel.Count)
             {
-                if (count > 0)
-                    currentPageIndex = count;
+                if (pageModel.Count > 0)
+                    currentPageIndex = pageModel.Count;
                 else
                     currentPageIndex = 1;
             }
             else
             {
-                currentPageIndex = pageIndex;
+                currentPageIndex = pageModel.PageIndex;
             }
 
             int firstPage = 1;
-            int lastPage = count == 0 ? 1 : count;
+            int lastPage = pageModel.Count == 0 ? 1 : pageModel.Count;
 
-            ViewBag.PageCounts = count;
-
+            ViewBag.PageCounts = pageModel.Count;
             ViewBag.Previous = previous;
             ViewBag.Next = next;
             ViewBag.CurrentIndex = currentPageIndex;
-            ViewBag.Total = total;
+            ViewBag.Total = pageModel.Total;
             ViewBag.FirstPage = firstPage;
             ViewBag.LastPage = lastPage;
 
-            return View();
+            return PartialView();
         }
+
 
         public bool SaveBlog(string id, string title, string content)
         {

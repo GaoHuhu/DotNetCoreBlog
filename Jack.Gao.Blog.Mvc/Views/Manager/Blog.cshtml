@@ -101,5 +101,10 @@
 <hr />
 
 @{
-    Html.RenderPartial("Page", null);
+    PageModel pageModel = new PageModel { PageIndex = ViewBag.PageIndex, Count = ViewBag.Count, Total = ViewBag.Total };
+    Html.RenderPartial("Page",pageModel);
 }
+
+PageIndex:@ViewBag.PageIndex
+Count:@ViewBag.Count
+Total:@ViewBag.Total
