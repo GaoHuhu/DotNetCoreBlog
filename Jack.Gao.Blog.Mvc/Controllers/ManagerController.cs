@@ -80,10 +80,11 @@ namespace Jack.Gao.Blog.Mvc.Controllers
             int firstPage = 1;
             int lastPage = count == 0 ? 1 : count;
 
+            ViewBag.Blogs = blogs;
+
             ViewBag.PageIndex = pageIndex;
             ViewBag.Count = count;
             ViewBag.Total = total;
-            ViewBag.Blogs = blogs;
             ViewBag.FirstPage = firstPage;
             ViewBag.LastPage = lastPage;
             ViewBag.PageIndex = currentPageIndex;
