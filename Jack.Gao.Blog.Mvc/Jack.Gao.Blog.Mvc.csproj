@@ -25,6 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jack.Gao.Blog.DataAccess\Jack.Gao.Blog.DataAccess.csproj" />
+    <ProjectReference Include="..\Jack.Gao.Blog.Infrastructure\Jack.Gao.Blog.Infrastructure.csproj" />
     <ProjectReference Include="..\Jack.Gao.Blog.ViewModel\Jack.Gao.Blog.ViewModel.csproj" />
   </ItemGroup>
   <ItemGroup>

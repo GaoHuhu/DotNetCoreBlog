@@ -6,11 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 using Jack.Gao.Blog.ViewModel;
 using Jack.Gao.Blog.DataAccess;
+using Jack.Gao.Blog.Infrastructure;
 
 namespace Jack.Gao.Blog.Mvc.Controllers
 {
     public class ManagerController : Controller
-    {
+    {      
         public IActionResult Index()
         {
             return View();
@@ -24,61 +25,15 @@ namespace Jack.Gao.Blog.Mvc.Controllers
 
             int count = 0;
             int total = 0;
+            int currentPageIndex = 0;
+            int firstPage = 0;
+            int lastPage = 0;
+            int previous = 0;
+            int next = 0;
 
             blogs = BlogDataAccess.GetBlogs(out count, out total, pageIndex, pageRows);
 
-            int previous = 1;
-
-            previous = pageIndex - 1;
-
-            if (previous <= 0)
-            {
-                previous = 1;
-            }
-            else
-            {
-                if (previous > count && count > 0)
-                {
-                    previous = count;
-                }
-            }
-
-            int next = 1;
-
-            next = pageIndex + 1;
-
-            if (next <= 0)
-            {
-                next = 1;
-            }
-            else
-            {
-                if (next > count && count > 0)
-                {
-                    next = count;
-                }
-            }
-
-            int currentPageIndex = 1;
-
-            if (currentPageIndex <= 0)
-            {
-                currentPageIndex = 1;
-            }
-            else if (currentPageIndex >count)
-            {
-                if (count > 0)
-                    currentPageIndex = count;
-                else
-                    currentPageIndex = 1;
-            }
-            else
-            {
-                currentPageIndex = pageIndex;
-            }
-
-            int firstPage = 1;
-            int lastPage = count == 0 ? 1 : count;
+            PageUtility.BuildPageParameters(out previous, out next, out currentPageIndex, out firstPage, out lastPage, pageIndex, count);
 
             string pageUrl = @"/Manager/Blog?pageIndex={0}&pageRows={1}";
 
@@ -104,7 +59,6 @@ namespace Jack.Gao.Blog.Mvc.Controllers
         {           
             return PartialView(pageModel);
         }
-
 
         public bool SaveBlog(string id, string title, string content)
         {
@@ -206,6 +160,7 @@ namespace Jack.Gao.Blog.Mvc.Controllers
         #endregion
 
         #region BlogType
+
         public IActionResult BlogType(int pageIndex = 1, int pageRows = 5)
         {
             int count = 0;
@@ -286,6 +241,7 @@ namespace Jack.Gao.Blog.Mvc.Controllers
         {
             return BlogTypeDataAccess.DeleteBlogType(id);
         }
+
         #endregion
     }
 }
