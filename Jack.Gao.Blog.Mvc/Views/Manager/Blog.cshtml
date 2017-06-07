@@ -101,6 +101,19 @@
 <hr />
 
 @{
-    PageModel pageModel = new PageModel { PageIndex = ViewBag.PageIndex, Count = ViewBag.Count, Total = ViewBag.Total,First= ViewBag.FirstPage, Last= ViewBag.LastPage, Previous= ViewBag.Previous, Next= ViewBag.Next };
+    PageModel pageModel = new PageModel
+    {
+        PageIndex = ViewBag.PageIndex,
+        Count = ViewBag.Count,
+        Total = ViewBag.Total,
+        //First = ViewBag.FirstPage,
+        //Last = ViewBag.LastPage,
+        //Previous = ViewBag.Previous,
+        //Next = ViewBag.Next,
+        FirstPageUrl = ViewBag.FirstPageUrl,
+        LastPageUrl= ViewBag.LastPageUrl,
+        PreviousPageUrl= ViewBag.PreviousPageUrl,
+        NextPageUrl= ViewBag.NextPageUrl
+    };
     Html.RenderPartial("Page",pageModel);
 }

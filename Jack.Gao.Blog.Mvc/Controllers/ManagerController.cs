@@ -80,89 +80,28 @@ namespace Jack.Gao.Blog.Mvc.Controllers
             int firstPage = 1;
             int lastPage = count == 0 ? 1 : count;
 
+            string pageUrl = @"/Manager/Blog?pageIndex={0}&pageRows={1}";
+
+            string firstPageUrl = string.Format(pageUrl, firstPage, pageRows);
+            string lastPageUrl = string.Format(pageUrl, lastPage, pageRows);
+            string previousPageUrl = string.Format(pageUrl, previous, pageRows);
+            string nextPageUrl = string.Format(pageUrl, next, pageRows);
+
             ViewBag.Blogs = blogs;
 
-            ViewBag.PageIndex = pageIndex;
             ViewBag.Count = count;
             ViewBag.Total = total;
-            ViewBag.FirstPage = firstPage;
-            ViewBag.LastPage = lastPage;
             ViewBag.PageIndex = currentPageIndex;
-            ViewBag.Previous = previous;
-            ViewBag.Next = next;
+            ViewBag.FirstPageUrl = firstPageUrl;
+            ViewBag.LastPageUrl = lastPageUrl;
+            ViewBag.PreviousPageUrl = previousPageUrl;
+            ViewBag.NextPageUrl = nextPageUrl;
 
             return View();
         }
 
         public PartialViewResult Page(PageModel pageModel)
-        {
-            int previous = 1;
-
-            previous = pageModel.PageIndex - 1;
-
-            if (previous <= 0)
-            {
-                previous = 1;
-            }
-            else
-            {
-                if (previous > pageModel.Count && pageModel.Count > 0)
-                {
-                    previous = pageModel.Count;
-                }
-            }
-
-            int next = 1;
-
-            next = pageModel.PageIndex + 1;
-
-            if (next <= 0)
-            {
-                next = 1;
-            }
-            else
-            {
-                if (next > pageModel.Count && pageModel.Count > 0)
-                {
-                    next = pageModel.Count;
-                }
-            }
-
-            int currentPageIndex = 1;
-
-            if (currentPageIndex <= 0)
-            {
-                currentPageIndex = 1;
-            }
-            else if (currentPageIndex > pageModel.Count)
-            {
-                if (pageModel.Count > 0)
-                    currentPageIndex = pageModel.Count;
-                else
-                    currentPageIndex = 1;
-            }
-            else
-            {
-                currentPageIndex = pageModel.PageIndex;
-            }
-
-            int firstPage = 1;
-            int lastPage = pageModel.Count == 0 ? 1 : pageModel.Count;
-
-            ViewBag.PageCounts = pageModel.Count;
-            ViewBag.Previous = previous;
-            ViewBag.Next = next;
-            ViewBag.CurrentIndex = currentPageIndex;
-            ViewBag.Total = pageModel.Total;
-            ViewBag.FirstPage = firstPage;
-            ViewBag.LastPage = lastPage;
-
-            pageModel.First = firstPage;
-            pageModel.Last = lastPage;
-            pageModel.PageIndex = currentPageIndex;
-            pageModel.Previous = previous;
-            pageModel.Next = next;
-
+        {           
             return PartialView(pageModel);
         }
 
