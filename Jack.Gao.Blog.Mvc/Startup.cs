@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Routing;
 
 namespace Jack.Gao.Blog.Mvc
 {
@@ -29,6 +30,7 @@ namespace Jack.Gao.Blog.Mvc
         {
             // Add framework services.
             services.AddMvc();
+            services.AddRouting();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +60,7 @@ namespace Jack.Gao.Blog.Mvc
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Jack.Gao.Blog.DataAccess;
 
-namespace JJack.Gao.Blog.Mvc.Controllers
+namespace Jack.Gao.Blog.Controllers
 {
     public class HomeController : Controller
     {
