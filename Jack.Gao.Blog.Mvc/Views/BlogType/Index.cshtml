@@ -14,7 +14,7 @@
             var name = document.getElementById("blogname").value;
 
             $.ajax({
-                url: "/Manager/SaveBlogType",
+                url: "/BlogType/SaveBlogType",
                 dataType: "json",
                 data: { "id": key, "name": name },
                 type: "post",
@@ -38,7 +38,7 @@
         function DeleteBlogType(key) {
             if (window.confirm("Are you sure delete blog type?")) {
                 $.ajax({
-                    url: "/Manager/DeleteBlogType",
+                    url: "/BlogType/DeleteBlogType",
                     dataType: "json",
                     data: { "id": key },
                     type: "post",
@@ -93,11 +93,19 @@
     <input type="button" name="content" id="content" value="Save" onclick="SaveBlogType()" />
 </div>
 <hr />
-<div>
-    <a href="/Manager/BlogType?pageIndex=@ViewBag.Previous&pageRows=5">Previous</a>
-    &nbsp;&nbsp;&nbsp;&nbsp;<a href="/Manager/BlogType?pageIndex=@ViewBag.Next&pageRows=5">Next</a>
-    &nbsp;&nbsp;&nbsp;&nbsp; Total page count:@ViewBag.PageCounts
-    &nbsp;&nbsp;&nbsp;&nbsp; Current page index:@ViewBag.CurrentIndex
-    &nbsp;&nbsp;&nbsp;&nbsp; Total rows:@ViewBag.Total
-</div>
+
+@{
+    PageModel pageModel = new PageModel
+    {
+        PageIndex = ViewBag.PageIndex,
+        Count = ViewBag.PageCounts,
+        Total = ViewBag.Total,
+        FirstPageUrl = ViewBag.FirstPageUrl,
+        LastPageUrl = ViewBag.LastPageUrl,
+        PreviousPageUrl = ViewBag.PreviousPageUrl,
+        NextPageUrl = ViewBag.NextPageUrl
+    };
+    Html.RenderPartial("Paging", pageModel);
+}
+
 

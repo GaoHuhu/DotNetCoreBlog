@@ -32,6 +32,7 @@
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\Error\" />
     <Folder Include="Views\Blog\" />
+    <Folder Include="Views\BlogType\" />
   </ItemGroup>
 
 </Project>
