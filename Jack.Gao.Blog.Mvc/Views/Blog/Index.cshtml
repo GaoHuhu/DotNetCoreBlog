@@ -15,7 +15,7 @@
             var content = document.getElementById("content").value;
 
             $.ajax({
-                url: "/Manager/SaveBlog",
+                url: "/Blog/SaveBlog",
                 dataType: "json",
                 data: { "id": key, "title": title, "content": content },
                 type: "post",
@@ -40,7 +40,7 @@
         function DeleteBlog(key) {
             if (window.confirm("Are you sure delete blog?")) {
                 $.ajax({
-                    url: "/Manager/DeleteBlog",
+                    url: "/Blog/DeleteBlog",
                     dataType: "json",
                     data: { "id": key },
                     type: "post",
@@ -77,14 +77,14 @@
                 <tbody>
                     @foreach (var item in blogs)
                     {
-                    <tr>
-                        <td>@item.BlogId</td>
-                        <td>@item.Title</td>
-                        <td>@item.Content</td>
-                        <td>@item.CreatedTime</td>
-                        <td>@item.UpdatedTime</td>
-                        <td><input type="button" value="Delete" onclick="DeleteBlog('@item.BlogId')" /> | <input type="button" value="Edit" onclick="ShowBlog('@item.BlogId','@item.Title','@item.Content')" /> | <a href="/Comment/Index?blogId=@item.BlogId">Comment</a></td>
-                    </tr>
+                        <tr>
+                            <td>@item.BlogId</td>
+                            <td>@item.Title</td>
+                            <td>@item.Content</td>
+                            <td>@item.CreatedTime</td>
+                            <td>@item.UpdatedTime</td>
+                            <td><input type="button" value="Delete" onclick="DeleteBlog('@item.BlogId')" /> | <input type="button" value="Edit" onclick="ShowBlog('@item.BlogId','@item.Title','@item.Content')" /> | <a href="/Comment/Index?blogId=@item.BlogId">Comment</a></td>
+                        </tr>
                     }
                 </tbody>
             </table>

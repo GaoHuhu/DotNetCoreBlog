@@ -259,3 +259,9 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/Jack.Gao.Blog.Controllers/Jack.Gao.Blog.Controllers.csproj
+/Jack.Gao.Blog.Controllers
+/Jack.Gao.Blog.Controllers/HomeController.cs
+/Jack.Gao.Blog.Controllers/Jack.Gao.Blog.Controllers.csproj
+/Jack.Gao.Blog.Controllers/HomeController.cs
+/Jack.Gao.Blog.Controllers/Jack.Gao.Blog.Controllers.csproj
