@@ -127,8 +127,6 @@ namespace Jack.Gao.Blog.Mvc.Controllers
             SqlParameter p2 = new SqlParameter();
             p2.ParameterName = "@blogid";
 
-
-
             if (string.IsNullOrEmpty(id))
             {
                 return false;
