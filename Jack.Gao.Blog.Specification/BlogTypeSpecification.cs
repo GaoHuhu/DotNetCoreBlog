@@ -10,7 +10,8 @@ namespace Jack.Gao.Blog.Specification
         public override bool IsValidation(BlogTypeViewModel t)
         {
             if (t == null)
-                throw new ArgumentNullException(nameof(t));
+                //throw new ArgumentNullException(nameof(t));
+                return false;
 
             if (!string.IsNullOrEmpty(t.Name))
                 return true;
